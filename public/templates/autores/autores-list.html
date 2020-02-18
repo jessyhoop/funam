@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-header">
+        <!--<a href="../../public-html/autores/autores-inactive-list.php"></a>-->
+        <a class="btn btn-outline-success float-right" ui-sref="autor_create">Crear autor</a>
+        <a class="btn btn-outline-dark float-right mr-1" ui-sref="autores_inactive_list">Lista inactiva</a>
+        <h1>Lista de autores</h1>
+    </div>
+    <div class="card-body">
+        <div ng-if="autores.length > 0">
+            <table class="table table-responsive-md table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre de autor</th>
+                        <th>Fecha de creaci&oacute;n</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="autor in autores">
+                        <td>{{autor.autor}}</td>
+                        <td>{{autor.created_at}}</td>
+                        <td>
+                            <a class="btn btn-outline-info" ui-sref="autor_update({id: autor.id})">Editar</a>
+                            <button class="btn btn-outline-danger" type="button" ng-click="inactivate(autor.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="autores.length === 0">
+            <h2>No hay registros</h2>
+        </div>
+    </div>
+</div>
