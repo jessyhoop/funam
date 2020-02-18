@@ -7,10 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
-
 class User extends Authenticatable {
 
     use Notifiable;
+
     //cuando tienes varias tablas de herencia debes de especificar la tabla
     protected $table = 'users';
 
@@ -27,6 +27,23 @@ class User extends Authenticatable {
         'verification_token',
         'admin'
     ];
+
+//mutadores-- ingresar y obtener valor de la bd con cierta modificiACION
+    public function setNameAttribute($attr) {//seteamos el valor para ingresar mutador
+        $this->attributes['name'] = strtolower($attr);
+    }
+
+    //acesor
+    public function getNameAttribute($name) {//seteamos el valor para ingresar mutador
+        return ucwords($name);
+    }
+
+    //mutador
+    public function setEmailAttribute($attr) {//seteamos el valor para ingresar mutador
+        $this->attributes['email'] = strtolower($attr);
+    }
+
+    //guardar mofidicaciones es  php artisan migrate:refesh --seed por que son operaciones sobre la bd
 
     /**
      * The attributes that should be hidden for arrays.
@@ -55,7 +72,7 @@ class User extends Authenticatable {
     }
 
     public function generarVerificationToken() {
-        return  Str::random(40);
+        return Str::random(40);
     }
 
 }
