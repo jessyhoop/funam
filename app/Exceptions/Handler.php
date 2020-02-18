@@ -48,4 +48,17 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+    
+//    //metodo nuevo para 
+//     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
+//    {
+//        if ($e->response) {
+//            return $e->response;
+//        }
+//
+//        return $request->expectsJson()
+//                    ? $this->invalidJson($request, $e)
+//                    : $this->invalid($request, $e);
+//    }
+    
 }
