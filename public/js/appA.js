@@ -1,4 +1,4 @@
-/* global base_url */
+/* global base_url  gitttttttttttttt */
 angular.module('app', ["ui.router"]);
 angular.module('app').config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/inicio');
