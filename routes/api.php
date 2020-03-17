@@ -13,5 +13,11 @@ Route::resource('transactions', 'Transaction\TransactionController', ['only' => 
 Route::resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
 //Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
 //http://localhost/funam/public/usuarios/main_usuarios
-Route::resource('users', 'User\UserController');
-//http://localhost/API/public/users
+Route::get('admin/home', 'ControllerAdmin@index');
+//Route::get('admin/inicio', 'ControllerAdmin@initcon'); //admin
+//http://localhost/funam/public/users
+
+Route::resource('admin/users', 'User\UserController');
+
+//carreras
+Route::resource('admin/carreras', 'CarreraController');

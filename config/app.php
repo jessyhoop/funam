@@ -50,9 +50,9 @@ return [
 
 'url' => env('APP_URL', 'http://localhost'),
  'asset_url' => env('ASSET_URL', null),
- //agregamos dos llaves
+ //agregamos dos llaves para el front y el back
 'app_scope' => 'front',
-'admin_route' => 'admin'
+'admin_route' => 'admin',
 
 /*
   |--------------------------------------------------------------------------

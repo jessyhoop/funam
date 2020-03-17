@@ -10,12 +10,12 @@
   | contains the "web" middleware group. Now create something great!
   |
  */
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', function () {
-    return view('usuarios');
-});
+//Route::get('/', function () {//si n o especificas es public
+//    return view('welcome');
+//});
+//Route::get('/home', function () {
+//    return view('usuarios');
+//});
 //se va moficiar para traer todos los contraoladores que son para la creacon de usuarios y edicicon
 //Auth::routes();
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -33,7 +33,18 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
+//vista admin
+//http://localhost/funam/public/admin/login
+Route::get('admin/login', function() {
+    return view('login');//solo especificamos el nombre de la view
+});
+Route::get('admin/inicio', 'ControllerAdmin@initcon'); //admin
+Route::get('inicio', 'ControllerFront@initcon'); //public
+//http://localhost/funam/public/inicio
+//login
 
+    Route::get('admin/logins', 'AuthController@index');
 
-//http://localhost/API/public/usuarios/main_usuarios
-Route::get('usuarios/main_usuarios', 'MainController@main_usuarios');
+//http://localhost/funam/public/admin/login
+//http://localhost/funam/public/main_usuarios
+Route::get('/mainusuarios', 'MainnController@mainusuarios');

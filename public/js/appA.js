@@ -1,48 +1,50 @@
-/* global base_url  gitttttttttttttt */
+/* global base_url  gitttttttttttttt, angular */
+var base_url='http://localhost/funam/public/';
 angular.module('app', ["ui.router"]);
 angular.module('app').config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/inicio');
-    $stateProvider.state('autores_list', {//nombre
-        url: '/autores-list',
-        templateUrl: base_url + 'templates/autores/autores-list.html',
-        controller: 'AutoresListCtrl'
+    http://localhost/funam/public/admin/home#!/usuarios-list
+    $stateProvider.state('usuarios_list', {//nombre
+        url: '/usuarios-list',
+        templateUrl: base_url + 'templates/usuarios/usuarios-list.html',
+        controller: 'UsuariosListCtrl'
     });
-    $stateProvider.state('autores_inactive_list', {
-        url: '/autores-inactive-list',
-        templateUrl: base_url + 'templates/autores/autores-inactive-list.html',
-        controller: 'AutoresInactiveListCtrl'
-    });
-    $stateProvider.state('autor_create', {
-        url: '/crear-autor',
-        templateUrl: base_url + 'templates/autores/autor-form.html',
-        controller:'AutorCreateCtrl'
-    });
-    $stateProvider.state('autor_update', {
-        url: '/actualizar-autor/:id',
-        templateUrl: base_url + 'templates/gacetas/autor-form.html',
-        controller:'AutorUpdateCtrl'
-    });
-//------
-    $stateProvider.state('gacetas_list', {
-        url: '/gacetas-list',
-        templateUrl: base_url + 'templates/gacetas/gacetas-list.html',
-        controller: 'GacetasListCtrl'
-    });
-    $stateProvider.state('gacetas_inactive_list', {
-        url: '/gacetas-inactive-list',
-        templateUrl: base_url + 'templates/gacetas/gacetas-inactive-list.html',
-        controller: 'GacetasInactiveListCtrl'
-    });
-    $stateProvider.state('gaceta_create', {
-        url: '/crear-gaceta',
-        templateUrl: base_url + 'templates/gacetas/gaceta-form.html',
-        controller:'GacetaCreateCtrl'
-    });
-    $stateProvider.state('gaceta_update', {
-        url: '/actualizar-gaceta/:id',
-        templateUrl: base_url + 'templates/gacetas/gaceta-form.html',
-        controller:'GacetaUpdateCtrl'
-    });
+//    $stateProvider.state('autores_inactive_list', {
+//        url: '/autores-inactive-list',
+//        templateUrl: base_url + 'templates/autores/autores-inactive-list.html',
+//        controller: 'AutoresInactiveListCtrl'
+//    });
+//    $stateProvider.state('autor_create', {
+//        url: '/crear-autor',
+//        templateUrl: base_url + 'templates/autores/autor-form.html',
+//        controller:'AutorCreateCtrl'
+//    });
+//    $stateProvider.state('autor_update', {
+//        url: '/actualizar-autor/:id',
+//        templateUrl: base_url + 'templates/gacetas/autor-form.html',
+//        controller:'AutorUpdateCtrl'
+//    });
+////------
+//    $stateProvider.state('gacetas_list', {
+//        url: '/gacetas-list',
+//        templateUrl: base_url + 'templates/gacetas/gacetas-list.html',
+//        controller: 'GacetasListCtrl'
+//    });
+//    $stateProvider.state('gacetas_inactive_list', {
+//        url: '/gacetas-inactive-list',
+//        templateUrl: base_url + 'templates/gacetas/gacetas-inactive-list.html',
+//        controller: 'GacetasInactiveListCtrl'
+//    });
+//    $stateProvider.state('gaceta_create', {
+//        url: '/crear-gaceta',
+//        templateUrl: base_url + 'templates/gacetas/gaceta-form.html',
+//        controller:'GacetaCreateCtrl'
+//    });
+//    $stateProvider.state('gaceta_update', {
+//        url: '/actualizar-gaceta/:id',
+//        templateUrl: base_url + 'templates/gacetas/gaceta-form.html',
+//        controller:'GacetaUpdateCtrl'
+//    });
 
 });
 function showNoty(response) {

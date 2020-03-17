@@ -47,11 +47,32 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @return void
      */
+// original   protected function mapWebRoutes() {
+//        Route::middleware('web')
+//                ->namespace($this->namespace)
+//                ->group(base_path('routes/web.php'));
+//    }
+//    ---------------------division admin y public-------------------------
     protected function mapWebRoutes() {
+        $adminScope = config('app.app_scope');
+        if ($adminScope == 'front') {
+            $this->namespace = 'App\Http\Controllers\FrontControllers';
+        }
+        if ($adminScope == 'admin') {
+            $this->namespace = 'App\Http\Controllers\AdminControllers';
+        }
         Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
     }
+
+//    nnuevas rutas
+//    protected function mapWebRoutes() {
+//        Route::middleware('web')
+//                 ->name('public.')
+//                ->namespace($this->namespace)
+//                ->group(base_path('routes/public.php'));
+//    }
 
     /**
      * Define the "api" routes for the application.
@@ -61,6 +82,13 @@ class RouteServiceProvider extends ServiceProvider {
      * @return void
      */
     protected function mapApiRoutes() {
+        $adminScope = config('app.app_scope');
+        if ($adminScope == 'front') {
+            $this->namespace = 'App\Http\Controllers\FrontControllers';
+        }
+        if ($adminScope == 'admin') {
+            $this->namespace = 'App\Http\Controllers\AdminControllers';
+        }
 //        sin peticion a api se omite
         Route::middleware('api')
                 ->namespace($this->namespace)

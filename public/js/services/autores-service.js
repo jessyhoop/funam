@@ -3,7 +3,7 @@ angular.module('app').service('UsuariosService', function ($http) {
     this.getAll = function () {
         return $http({
             method: 'GET',
-            url: api_url + 'autores/get_all'
+            url: api_url + 'admin/users'
         });
     };
     this.getAllInactives = function () {

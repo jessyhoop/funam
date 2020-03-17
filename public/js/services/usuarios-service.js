@@ -1,9 +1,12 @@
-angular.module('app').service('AutoresService', function ($http) {
+angular.module('app').service('UsuariosService', function ($http) {
+    var api_url='http://localhost/funam/public/';
 
     this.getAll = function () {
         return $http({
             method: 'GET',
-            url: api_url + 'autores/get_all'
+//            url: 'http://localhost/funam/public/admin/users'
+            url: api_url+'admin/users'
+//            url: '{{ route("login") }}'
         });
     };
     this.getAllInactives = function () {

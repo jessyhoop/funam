@@ -1,5 +1,5 @@
 <?php
-
+//modelos de la bd
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -51,8 +51,8 @@ class User extends Authenticatable {
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
-    ];
+        'password', 'remember_token','verification_token'
+    ];//ocultados en las respuestas json
 
     /**
      * The attributes that should be cast to native types.
@@ -71,7 +71,8 @@ class User extends Authenticatable {
         return $this->admin == User::USUARIO_ADMINISTRADOR;
     }
 
-    public function generarVerificationToken() {
+ 
+    public static function generarVerificationToken() {
         return Str::random(40);
     }
 

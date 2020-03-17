@@ -6,7 +6,8 @@
         <h1>Lista de autores</h1>
     </div>
     <div class="card-body">
-        <div ng-if="autores.length > 0">
+        <!-- <div>{{usuarios}}</div>-->
+        <div ng-if="usuarios.length > 0">
             <table class="table table-responsive-md table-striped">
                 <thead>
                     <tr>
@@ -16,18 +17,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="autor in autores">
-                        <td>{{autor.autor}}</td>
-                        <td>{{autor.created_at}}</td>
+                    <tr ng-repeat="usuario in usuarios">
+                        <td>{{usuario.id}}</td>
+                        <td>{{usuario.name}}</td>
+                        <td>{{usuario.email}}</td>
                         <td>
                             <a class="btn btn-outline-info" ui-sref="autor_update({id: autor.id})">Editar</a>
-                            <button class="btn btn-outline-danger" type="button" ng-click="inactivate(autor.id)">Eliminar</button>
+                            <button class="btn btn-outline-danger" type="button" ng-click="inactivate(usuario.id)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div ng-if="autores.length === 0">
+        <div ng-if="usuarios.length === 0">
             <h2>No hay registros</h2>
         </div>
     </div>

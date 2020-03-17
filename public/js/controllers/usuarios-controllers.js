@@ -1,10 +1,11 @@
-angular.module('app').controller('AutoresListCtrl', function ($scope, AutoresService) {
-    $scope.autores = [];
+angular.module('app').controller('UsuariosListCtrl', function ($scope, UsuariosService) {
+    $scope.usuarios = [];
+
     $scope.inactivate = function (id) {
-        AutoresService.inactivate(id).then(function (success) {
+        UsuariosService.inactivate(id).then(function (success) {
             showNoty(success);
-            AutoresService.getAll().then(function (response) {
-                $scope.autores = response.data.autores;
+            UsuariosService.getAll().then(function (response) {
+                $scope.usuarios = response.data;
             }, function (error) {
                 showNoty(error);
             });
@@ -12,19 +13,21 @@ angular.module('app').controller('AutoresListCtrl', function ($scope, AutoresSer
             showNoty(error);
         });
     };
-    AutoresService.getAll().then(function (response) {
-        $scope.autores = response.data.autores;
+
+    UsuariosService.getAll().then(function (response) {
+        $scope.usuarios = response.data;
+        console.log(response);
     }, function (error) {
         showNoty(error);
     });
 });
-angular.module('app').controller('AutoresInactiveListCtrl', function ($scope, AutoresService) {
-    $scope.autores = [];
+angular.module('app').controller('AutoresInactiveListCtrl', function ($scope, UsuariosService) {
+    $scope.usuarios = [];
     $scope.reactivate = function (id) {
-        AutoresService.reactivate(id).then(function (success) {
+        UsuariosService.reactivate(id).then(function (success) {
             showNoty(success);
-            AutoresService.getAllInactives().then(function (success) {
-                $scope.autores = success.data.autores;
+            UsuariosService.getAllInactives().then(function (success) {
+                $scope.usuarios = success.data.usuarios;
             }, function (error) {
                 showNoty(error);
             });
@@ -32,17 +35,17 @@ angular.module('app').controller('AutoresInactiveListCtrl', function ($scope, Au
             showNoty(error);
         });
     };
-    AutoresService.getAllInactives().then(function (success) {
-        $scope.autores = success.data.autores;
+    UsuariosService.getAllInactives().then(function (success) {
+        $scope.usuarios = success.data.usuarios;
     }, function (error) {
         showNoty(error);
     });
 });
-angular.module('app').controller('AutorCreateCtrl', function ($scope, AutoresService) {
+angular.module('app').controller('AutorCreateCtrl', function ($scope, UsuariosService) {
     $scope.autor = {};
     $scope.heading = 'Creación';
     $scope.submit = function () {
-        AutoresService.create($scope.autor).then(function (success) {
+        UsuariosService.create($scope.autor).then(function (success) {
             showNoty(success);
             setTimeout(function () {
                 window.location.href = '/difusion/';
@@ -52,12 +55,12 @@ angular.module('app').controller('AutorCreateCtrl', function ($scope, AutoresSer
         });
     };
 });
-angular.module('app').controller('AutorUpdateCtrl', function ($scope, $stateParams, AutoresService) {
+angular.module('app').controller('AutorUpdateCtrl', function ($scope, $stateParams, UsuariosService) {
     $scope.autor = {};
     $scope.heading = 'Actualización';
     console.log($stateParams);
     $scope.submit = function () {
-        AutoresService.update($scope.autor).then(function (success) {
+        UsuariosService.update($scope.autor).then(function (success) {
             showNoty(success);
             setTimeout(function () {
                 window.location.href = '/difusion/';
@@ -66,7 +69,7 @@ angular.module('app').controller('AutorUpdateCtrl', function ($scope, $statePara
             showNoty(error);
         });
     };
-    AutoresService.getById($stateParams.id).then(function (success) {
+    UsuariosService.getById($stateParams.id).then(function (success) {
         $scope.autor = success.data.autor;
     }, function (error) {
         showNoty(error);

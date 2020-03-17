@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-use App\Http\Request;//usar para admin y public
+use Illuminate\Http\Request;//usar para admin y public
 use Illuminate\Support\Facades\Schema; //LINEA NECEASARIA PARA EL TAMAÑO DE LA CADENA
 use Illuminate\Support\ServiceProvider;
 

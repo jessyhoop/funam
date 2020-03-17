@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Traits;
+ use Illuminate\Support\Collection;//importante para el showall el uso de la colecction
+  use Illuminate\Database\Eloquent\Model;//importante
 
+//codigo necesario para construir todas las respuestas de la api
 
-//codigo necesario para construir todas las repsuestas de la api
 trait ApiResponse {
 
     //respuestas sactifactorias
@@ -16,11 +18,10 @@ trait ApiResponse {
     }
 
     protected function showAll(Collection $collection, $code = 200) {
-        return $this->successResponse(['data' => $collection], $code);
+        return $this->successResponse($collection, $code);
     }
 
     protected function showOne(Model $instance, $code = 200) {
         return $this->successResponse(['data' => $instance], $code);
     }
-
 }

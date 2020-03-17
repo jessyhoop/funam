@@ -2,18 +2,25 @@
 
 namespace App\Exceptions;
 
+use \App\Traits\ApiResponse;
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
-class Handler extends ExceptionHandler
-{
+namespace App\Exceptions\Handler;
+
+use lluminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler; //clase padre de las excepciones
+
+class Handler extends ExceptionHandler {
+
+    use ApiResponse;
+
     /**
      * A list of the exception types that are not reported.
      *
      * @var array
      */
     protected $dontReport = [
-        //
+            //
     ];
 
     /**
@@ -32,8 +39,7 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
-    {
+    public function report(Exception $exception) {
         parent::report($exception);
     }
 
@@ -44,21 +50,25 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
-    {
+    public function render($request, Exception $exception) {
         return parent::render($request, $exception);
     }
-    
-//    //metodo nuevo para 
-//     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
-//    {
+
+//    protected function unauthenticated($request, AuthenticationException $exception) {
+//        return $request->expectsJson() ?
+//                response()->json(['message' => $exception->getMessage()], 401) : redirect()->guest($exception->redirectTo() ?? route('login'));
+//    }
+//    protected function unauthenticated($request, AuthenticationException $exception) {
+//        return $request->expectsJson() ? response()->json(['message' => $exception->getMessage()], 401) : redirect()->guest($exception->redirectTo() ?? route('login'));
+//    }
+//
+////    //metodo nuevo para obtener respuesta json de error retornamos respuesta de tipo json 
+//    protected function convertValidationExceptionToResponse(ValidationException $e, $request) {
 //        if ($e->response) {
 //            return $e->response;
 //        }
 //
-//        return $request->expectsJson()
-//                    ? $this->invalidJson($request, $e)
-//                    : $this->invalid($request, $e);
+//        return $request->expectsJson() ? $this->invalidJson($request, $e) : $this->invalid($request, $e);
 //    }
-    
+
 }
