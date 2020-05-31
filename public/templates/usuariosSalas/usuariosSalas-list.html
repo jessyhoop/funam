@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-success float-right" ui-sref="usuarioSalas_create">Crear usuario</a>
+            <a class="btn btn-outline-dark float-right mr-1" ui-sref="usuariosSalas_inactive_list">Lista inactiva</a>
+            <h1>Lista de Usuarios en salas</h1>
+        </div>
+        <div class="card-body">
+            <div ng-if="usuariosSalas.length > 0">
+                <table class="table table-responsive-md table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre de Usuario</th>
+                            <th>Sala</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="usuario in usuariosSalas">
+                            <td>{{usuarioSalas.usuario}}</td>
+                            <td>{{usuarioSalas.sala}}</td>
+                            <td>
+                                <a class="btn btn-outline-info" 
+                                   ui-sref="usuarioSalas_update({id:usuarioSalas.idUsuarioSala})">Editar</a>
+                                <button class="btn btn-outline-danger"
+                                        type="button" ng-click="inactivate(usuarioSalas.idUsuarioSala)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="usuariosSalas.length === 0">
+                <h2>No hay registros</h2>
+            </div>
+        </div>
+    </div>
+</div>

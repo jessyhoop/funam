@@ -1,6 +1,5 @@
 angular.module('app').controller('UsuariosListCtrl', function ($scope, UsuariosService) {
     $scope.usuarios = [];
-
     $scope.inactivate = function (id) {
         UsuariosService.inactivate(id).then(function (success) {
             showNoty(success);
@@ -13,21 +12,19 @@ angular.module('app').controller('UsuariosListCtrl', function ($scope, UsuariosS
             showNoty(error);
         });
     };
-
     UsuariosService.getAll().then(function (response) {
         $scope.usuarios = response.data;
-        console.log(response);
     }, function (error) {
         showNoty(error);
     });
 });
-angular.module('app').controller('AutoresInactiveListCtrl', function ($scope, UsuariosService) {
+angular.module('app').controller('UsuariosInactiveListCtrl', function ($scope, UsuariosService) {
     $scope.usuarios = [];
     $scope.reactivate = function (id) {
         UsuariosService.reactivate(id).then(function (success) {
             showNoty(success);
             UsuariosService.getAllInactives().then(function (success) {
-                $scope.usuarios = success.data.usuarios;
+                $scope.usuarios = success.data;
             }, function (error) {
                 showNoty(error);
             });
@@ -36,16 +33,16 @@ angular.module('app').controller('AutoresInactiveListCtrl', function ($scope, Us
         });
     };
     UsuariosService.getAllInactives().then(function (success) {
-        $scope.usuarios = success.data.usuarios;
+        $scope.usuarios = success.data;
     }, function (error) {
         showNoty(error);
     });
 });
-angular.module('app').controller('AutorCreateCtrl', function ($scope, UsuariosService) {
-    $scope.autor = {};
+angular.module('app').controller('UsuarioCreateCtrl', function ($scope, UsuariosService) {
+    $scope.usuario = {};
     $scope.heading = 'Creación';
     $scope.submit = function () {
-        UsuariosService.create($scope.autor).then(function (success) {
+        UsuariosService.create($scope.usuario).then(function (success) {
             showNoty(success);
             setTimeout(function () {
                 window.location.href = '/difusion/';
@@ -55,12 +52,12 @@ angular.module('app').controller('AutorCreateCtrl', function ($scope, UsuariosSe
         });
     };
 });
-angular.module('app').controller('AutorUpdateCtrl', function ($scope, $stateParams, UsuariosService) {
-    $scope.autor = {};
+angular.module('app').controller('UsuarioUpdateCtrl', function ($scope, $stateParams, UsuariosService) {
+    $scope.usuario = {};
     $scope.heading = 'Actualización';
     console.log($stateParams);
     $scope.submit = function () {
-        UsuariosService.update($scope.autor).then(function (success) {
+        UsuariosService.update($scope.usuario).then(function (success) {
             showNoty(success);
             setTimeout(function () {
                 window.location.href = '/difusion/';
@@ -70,7 +67,7 @@ angular.module('app').controller('AutorUpdateCtrl', function ($scope, $statePara
         });
     };
     UsuariosService.getById($stateParams.id).then(function (success) {
-        $scope.autor = success.data.autor;
+        $scope.usuario = success.data;
     }, function (error) {
         showNoty(error);
     });

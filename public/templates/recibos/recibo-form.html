@@ -1,0 +1,80 @@
+<div class="container"> 
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-danger float-right" ui-shref="recibos_list">Cancelar</a>
+
+            <h1>{{heading}} de Recibo</h1>
+        </div>
+        <div class="card-body">
+            <form novalidate="" ng-submit="submit()">
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="codigo">Codigo</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="codigo" class="form-control" type="text"
+                               placeholder="Codigo" 
+                               required="" ng-model="recibo.codigo">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="horas">Cantidad de Horas</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="horas" class="form-control" 
+                               type="text"
+                               placeholder="Cantidad de Horas" 
+
+                               required="" ng-model="recibo.horas">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="hojas">Cantidad de Hojas</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="hojas" class="form-control" type="number"
+                               required="" ng-model="recivo.hojas">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="alumno">Alumno</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <select class="form-control" id="alumno" ng-model="recibo.alumno" required>
+                            <option>jessica hernadez aguilar -415078850</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="tipo">Tipo de recibo</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <select class="form-control" id="tipo" ng-model="recibo.tipo" required>
+                            <option>415078850</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Enviar</button>
+            </form>
+
+        </div>
+    </div>
+</div>

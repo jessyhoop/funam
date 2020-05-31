@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-success float-right" ui-sref="main.rol_create">Crear rol</a>
+            <a class="btn btn-outline-dark float-right mr-1" ui-sref="main.roles_inactive_list">Lista inactiva</a>
+            <h1>Lista de roles</h1>
+        </div>
+        <div class="card-body">
+            <div ng-if="roles.length > 0">
+                <div class="card-body">
+                    <div class="group-group">
+                        <label for="filter">Rol:</label>
+                        <input id="filter" class="form-control" type='text' ng-model='buscador.rol'
+                               placeholder="Rol para buscar " />
+                    </div>
+                </div>
+                <table class="table table-responsive-md table-striped">
+                    <thead>
+                        <tr>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rol in roles|filter:buscador">
+                            <td>{{rol.rol}}</td>
+                            <td>
+                                <a class="btn btn-outline-info" ui-sref="main.rol_update({id:rol.id})
+                                   ">Editar</a>
+                                <button class="btn btn-outline-danger" type="button" ng-click="inactivate(
+                                                        rol.id)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="roles.length === 0">
+                <h2>No hay registros</h2>
+            </div>
+        </div>
+    </div>
+</div>  

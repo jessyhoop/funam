@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-danger float-right" ui-shref="controles_list">Cancelar</a>
+
+            <h1>{{heading}} de Control</h1>
+        </div>
+        <div class="card-body">
+            <form novalidate="" ng-submit="submit()">
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="impresiones">N&uacute;mero de impresiones</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="impresiones" class="form-control" type="number"
+                               placeholder="N&uacute;mero de impresiones" 
+                               required="" ng-model="control.impresiones">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="horaEntrada">Hora de entrada</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="horaEntrada" class="form-control" 
+                               type="time"
+                               required="" ng-model="control.horaEntrada">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="horaEntrada">Hora de salida</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="horaSalida" class="form-control" type="time"
+                               required="" ng-model="control.horaSalida">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="alumno">Alumno</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <select class="form-control" id="alumno" ng-model="control.alumno" required>
+                            <option>jessica hernadez aguilar -415078850</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="recibo">Recibo</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <select class="form-control" id="recibo" ng-model="control.recibo" required>
+                            <option>415078850</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Enviar</button>
+            </form>
+
+        </div>
+    </div>
+</div>

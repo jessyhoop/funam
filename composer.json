@@ -47,6 +47,7 @@
         }
     },
     "minimum-stability": "dev",
+    "thedevsaddam/lumen-route-list": "^1.0",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [

@@ -26,9 +26,13 @@ class ControllerAdmin extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+//    public function index()
+//    {
+//         return view('usuarios');
+//    }
     public function index()
     {
-         return view('usuarios');
+         return view('home');
     }
     public function initcon()
     {

@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-success float-right" ui-sref="control_create">Crear control</a>
+            <a class="btn btn-outline-dark float-right mr-1" ui-sref="controles_inactive_list">Lista inactiva</a>
+            <h1>Lista de control</h1>
+        </div>
+        <div class="card-body">
+            <div ng-if="controles.length > 0">
+                <table class="table table-responsive-md table-striped">
+                    <thead>
+                        <tr>
+                            <th>impresiones</th>
+                            <th>Hora de entrada</th>
+                            <th>Hora de salida</th>
+                            <th>Alumno</th>
+                            <th>Recibo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="control in controles">
+                            <td>{{control.impresiones}}</td>
+                            <td>{{control.horaEntrada}}</td>
+                            <td>{{control.horaSalida}}</td>
+                            <td>{{control.alumno}}</td>
+                            <td>{{control.recibo}}</td>
+                            <td>
+                                <a class="btn btn-outline-info"
+                                   ui-sref="control_update({id: control.idControlTiempo})">Editar</a>
+                                <button class="btn btn-outline-danger" type="button" 
+                                        ng-click="inactivate(control.idControlTiempo)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="controles.length === 0">
+                <h2>No hay registros</h2>
+            </div>
+        </div>
+    </div>
+</div>

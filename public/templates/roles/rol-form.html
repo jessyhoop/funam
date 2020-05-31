@@ -1,0 +1,25 @@
+
+<div class="container"> 
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-danger float-right" ui-sref="main.roles_list">Cancelar</a>
+            <h1>{{heading}} de Rol</h1>
+        </div>
+        <div class="card-body">
+            <form novalidate="" ng-submit="submit()">
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="rol">Rol</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="rol" class="form-control" type="text"
+                               placeholder="Rol" 
+                               required="" ng-model="rol.rol">
+                    </div>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Enviar</button>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-danger float-right" ui-sref="main.carreras_list">Cancelar</a>
+ 
+            <h1>{{heading}} de carrera</h1>
+        </div>
+        <div class="card-body">
+            <form novalidate="" ng-submit="submit()">
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="carrera">Carrera</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="carrera" class="form-control" type="text" placeholder="carrera" required="" ng-model="carrera.carrera">
+                    </div>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Enviar</button>
+            </form>
+
+        </div>
+    </div>
+</div>

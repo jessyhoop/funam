@@ -1,0 +1,43 @@
+<div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <!--<a href="../../public-html/alumnos/alumnos-inactive-list.php"></a>-->
+                <a class="btn btn-outline-dark float-right mr-1" ui-sref="alumnos_list">Lista activa</a>
+                <h1>Lista de Alumnos Inactivos</h1>
+            </div>
+            <div class="card-body">
+                <div ng-if="alumnos.length > 0">
+                    <table class="table table-responsive-md table-striped">
+                        <thead>
+                            <tr>
+                                <th>N&uacute;m.cuenta</th>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Carrera</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="alumno in alumnos">
+                                <td>{{alumno.cuenta}}</td>
+                                <td>{{alumno.nombre}}</td>
+                                <td>{{alumno.aPaterno}}</td>
+                                <td>{{alumno.aMaterno}}</td>
+                                <td>{{alumno.carrera}}</td>
+                                <td>{{alumno.updated_at}}</td>
+                                <td>
+                                    <button class="btn btn-outline-info" type="button" ng-click="reactivate(alumno.id)">Activar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-if="alumnos.length === 0">
+                    <h2>No hay registros</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

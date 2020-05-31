@@ -1,0 +1,33 @@
+<div class="container"> 
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-outline-danger float-right" ui-sref="main.salas_list">Cancelar</a>
+            <h1>{{heading}} de Salas</h1>
+        </div>
+        <div class="card-body">
+            <form novalidate="" ng-submit="submit()">
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="sala">Sala</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="sala" class="form-control" type="text"
+                               placeholder="Sala" 
+                               required="" ng-model="sala.sala">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-12 col-md-2">
+                        <label for="sala">Cupo</label>
+                    </div>
+                    <div class="col-12 col-md-10"> 
+                        <input id="cupo" class="form-control" type="number"
+                               placeholder="Cupo" 
+                               required="" ng-model="sala.cupo">
+                    </div>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>

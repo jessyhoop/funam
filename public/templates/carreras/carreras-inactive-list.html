@@ -1,0 +1,43 @@
+<div >
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <!--<a href="../../public-html/carreras/carreras-inactive-list.php"></a>-->
+                <a class="btn btn-outline-dark float-right mr-1" ui-sref="main.carreras_list">Lista activa</a>
+                <h1>Lista de Carreras Inactivas</h1>
+            </div>
+            <div class="card-body">
+                <div ng-if="carreras.length > 0">
+                    <div class="card-body">
+                        <div class="group-group">
+                            <label for="filter">Carrera:</label>
+                            <input id="filter" class="form-control" type='text' ng-model='buscador.carrera'
+                                   placeholder="Carrera para buscar " />
+                        </div>
+                    </div>
+                    <table class="table table-responsive-md table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th>Carrera</th>
+                                <th>Fecha de desactivaci&oacute;n</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="carrera in carreras | filter:buscador">
+                                <td>{{carrera.carrera}}</td>
+                                <td>{{carrera.updated_at}}</td>
+                                <td>
+                                    <button class="btn btn-outline-info" type="button" ng-click="reactivate(carrera.id)">Activar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-if="carreras.length === 0">
+                    <h2>No hay registros</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

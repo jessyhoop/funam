@@ -2,146 +2,90 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Models\Carrera;//modelo
+use App\Models\Carrera; //modelo
+use App\Models\Rol; //modelo
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
-use Illuminate\Validation\Rule;
 
 class CarreraController extends ApiController {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index() {
-        $carreras = Carrera::all();
-//        echo '<pre>';
-//        print_r(response()->json(['data' => $usuarios], 200));
-//        echo '</pre>';
-//        return view('usuarios',response()->json(['data'=>$usuarios],200));
-//        print('d');
-        //respuesta API
+    public function get_all() {
+//api---  http://localhost/funam/public/admin/carreras/get_all
+        $carreras = Carrera::get_all_actives();
         return $this->showAll($carreras);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        
+    public function get_all_inactives() {
+//api---http://localhost/funam/public/admin/carreras/get_all
+        $carreras = Carrera::get_all_inactives();
+        return $this->showAll($carreras);
     }
 
-    public function principal() {
-        return view('usuarios');
+//    public function get_by_id($id) {
+////        $carrera = Carrera::find($id);
+//////        dd($carrera);
+////        if ($carrera) {
+////            return $this->showOne($carrera);
+////        } else {
+////            return $this->errorResponse('no se encontraron registros con el id '.$id, 402);
+////        }
+//        $carrera = Carrera::find($id);
+//        return $this->showOne($carrera);
+//    }
+    //argumentos-es relacion de 
+    //dependencia implicita pero no
+    // en lo que revise que tenga otroa campos
+    //o dependa de otras tablas
+    public function get_by_id(Carrera $carrera) {
+        return $this->showOne($carrera);
     }
 
 //    http://localhost/funam/public/users  necesitamos mandar datos sino marca erro en db default 
-    public function store(Request $request) {//post create
+    public function create(Request $request) {//post create
         //postman-form data http://localhost/funam/public/users
         $campos = $request->all(); //ontenemos toda la peticion
         $rules = [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6'
+            'carrera' => ['required',
+                'unique:carrera']
         ];
-//        //cuando fallan las reglas laravel realiza una redireccion a la ubicacion anteror del usuario
+//       //cuando fallan las reglas laravel realiza una redireccion a la ubicacion anteror del usuario
         $this->validate($request, $rules);
         //obtenemos peticiones especidicas
-        $campos['password'] = bcrypt($request->password);
-        $campos['verified'] = User::USUARIO_NO_VERIFICADO;
-        $campos['verification_token'] = User::generarVerificationToken();
-        $campos['admin'] = User::USUARIO_REGULAR;
-        $usuario = User::create($campos);
-//        return response()->json(['data' => $usuario], 201);
-        return response()->json(['data' => $usuario], 201);
-//        return $this->successResponse($usuario,200);
+        $campos['carrera'] = $request->carrera;
+        $campos['status'] = Carrera::ACTIVO;
+        $carrera = Carrera::create($campos);
+        return $this->showOne($carrera, "registro creado correctamente");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id) {
-        $usuario = User::findOrFail($id);
-        return $this->showOne($usuario);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id) {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-//    http://localhost/funam/public/users/3
-//    http://localhost/funam/public/users/35856989   mala respuesta
-    public function update(Request $request, $id) {
-        $user = User::findOrFail($id); //find or fail por si existe o no en la bd
-//reglas 
+    public function update(Request $request) {
+        $carrera = Carrera::findOrFail($request->id); //find or fail por si existe o no en la bd
+//  print_r($carrera);
+//<columna>=>unique:<nombredeTabla>,<columna>
         $reglas = [
-            'email' => 'email|unique:users,email,' . $user->id, //valide el email exepto por su mismo email
-            'password' => 'min:6|confirmed',
-            'admin' => Rule::in([User::USUARIO_ADMINISTRADOR, User::USUARIO_REGULAR])
-//            'admin' => 'in' . User::USUARIO_ADMINISTRADOR . ',' . User::USUARIO_REGULAR, //cumpla con alguna de estas dos funciones
+            'carrera' => 'required|unique:carrera,carrera,' . $request->id
         ];
         $this->validate($request, $reglas);
-        //verificacion si tienen datos 
-        if ($request->has('name')) {
-            $user->name = $request->name; //asignamos el attr name es igual al valor recibido a la peticion
-        }
-        if ($request->has('email') && $user->email != $request->email) {
-            $user->verified = User::USUARIO_NO_VERIFICADO;
-            $user->verification_token = User::generarVerificationToken(); //valida nuevo email
-            $user->email = $request->email; //asignamos el attr name es igual al valor recibido a la peticion
-        }
-        if ($request->has('password')) {
-            $user->password = bcrypt($request->password);
-        }
-
-        if ($request->has('admin')) {
-            //solo un admin puede decidir si e so no admin 
-            //si ya e sun usuario verifcado solo asi se convierte en admin
-            if (!$user->esVerificado()) {
-//                return response()->json(['error' => 'solo usuarios veriacacion cambiar este valor', 'codigp' => 409, 409]);
-
-                return $this->errorResponse('unicamente los usuarios verificados '
-                                . 'pueden cambiar su valor de admi', 409);
-            }
-            $user->admin = $request->admin;
-        }
-        if (!$user->isDirty()) {//si hay un peticion mal formulada 
-//            return response()->json(['error' => 'se debe de especificar almeno un valor diferente para guardar los cambios'
-//                        , 'code' => 422], 422);
-            return $this->errorResponse('se debe de especificar almeno un valor diferente para guardar los cambios'
-                            , 422);
-        }
-        $user->save();
-        return response()->json(['data' => $user], 200);
+        $carrera->carrera = $request->carrera; //asignamos el attr name es igual al valor recibido a la peticion
+//        if (!$carrera->isDirty()) {//debe de cambiarse algo para ser guardado
+//            return $this->errorResponse('se debe'
+//                            . ' de especificar almenos un valor diferente para guardar los cambios'
+//                            , 422);
+//        }
+        $carrera->save();
+        return $this->showOne($carrera, 'registro actualizado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id) {
-        
+    public function inactivate(Carrera $carrera) {
+//        $carrera = Carrera::findOrFail($id); //find or fail por si existe o no en la bd
+        $carrera->status = Carrera::INACTIVO;
+        $carrera->save();
+        return $this->showOne($carrera,'Carrera Deactivada');
+    }
+
+    public function reactivate(Carrera $carrera) {
+        $carrera->status = Carrera::ACTIVO;
+        $carrera->save();
+        return $this->showOne($carrera,'Carrera Reactivada');
     }
 
 }

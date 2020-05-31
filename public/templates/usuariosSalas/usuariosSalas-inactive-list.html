@@ -1,0 +1,39 @@
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <!--<a href="../../public-html/usuariosSalas/usuariosSalas-inactive-list.php"></a>-->
+            <a class="btn btn-outline-dark float-right mr-1" ui-sref="usuariosSalas_list">Lista activa</a>
+            <h1>Lista de Usuarios en Salas Inactivos</h1>
+        </div>
+        <div class="card-body">
+            <div ng-if="usuariosSalas.length > 0">
+                <table class="table table-responsive-md table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre de usuario</th>
+                            <th>Sala</th>
+                            <th>Fecha de desactivaci&oacute;n</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="usuarioSalas in usuariosSalas">
+                            <td>{{usuarioSalas.usuario}}</td>
+                            <td>{{usuarioSalas.sala}}</td>
+                            <td>{{usuarioSalas.updated_at}}</td>
+                            <td>
+                                <button class="btn
+                                        btn-outline-info" type="button" 
+                                        ng-click="reactivate(usuarioSalas.idUsuarioSalas)">Activar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="usuariosSalas.length === 0">
+                <h2>No hay registros</h2>
+            </div>
+        </div>
+    </div>
+</div>
